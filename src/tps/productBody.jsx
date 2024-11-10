@@ -1,7 +1,7 @@
 import { PropTypes } from "prop-types";
 // import { propTypes } from "react-bootstrap/esm/Image";
 // import React from "react"
-export default function ProductBody({ productli }) {
+export default function ProductBody({ productli,handleDelete }) {
   // console.log(productli)
   return (
  <>
@@ -13,13 +13,16 @@ export default function ProductBody({ productli }) {
         <td>{productli.category}</td>
         <td>{<img  style={{width:"150px",height:"150px"}} src={productli.image} alt={productli.title}></img>}</td>
         <td>{productli.rating.count}/{productli.rating.rate}</td>
+        <td><button onClick={()=>handleDelete(productli.id)} className="btn btn-warning" >Delete</button></td>
       </tr>
  </>
     );
   }
   
   ProductBody.propTypes = {
-    productli : PropTypes.Object,
+    productli: PropTypes.object.isRequired,
+    handleDelete: PropTypes.func.isRequired,
+
     // id : PropTypes.Number,
     // title : PropTypes.string,
     // price : PropTypes.Number,

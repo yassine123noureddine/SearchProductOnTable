@@ -17,6 +17,15 @@ export default function ProductList() {
         fetchData();
     }, []);
 
+// this function handeling delete
+const handleDelete=(id1) =>{
+    const productTempdelet = productli.filter((item) => item.id !== id1)
+    setProductLi(productTempdelet)
+    console.log("Product deleted:", id1);
+    // console.log(productTempdelet)
+    // setItems((prevItems) => prevItems.filter((item) => item.id !== id));
+  
+}
 
     function handlChange(e) {
         e.preventDefault();
@@ -66,20 +75,20 @@ export default function ProductList() {
                 const productTemp = productli.filter(product => {
                     return product.category.startsWith(button)
                 })
-                return productTemp.map((product, key) => {
+                return productTemp.map((product) => {
 
                     // console.log(inputSearch)
-                    return <ProductBody key={key} productli={product} />
+                    return <ProductBody key={product.id}  productli={product} handleDelete={handleDelete} />
                 });
             } else {
                 const productTemp = productli.filter(product => {
                     // console.log(product.id)
                     return product.title.startsWith(inputSearch) || product.id.toString().startsWith(inputSearch) || product.category.startsWith(inputSearch) || product.description.includes(inputSearch)
                 })
-                return productTemp.map((product, key) => {
+                return productTemp.map((product) => {
 
                     // console.log(inputSearch)
-                    return <ProductBody key={key} productli={product} />
+                    return <ProductBody key={product.id} productli={product} handleDelete={handleDelete}/>
                 });
             }
 
@@ -126,6 +135,7 @@ export default function ProductList() {
                     <th>Category</th>
                     <th>Image</th>
                     <th>Rating</th>
+                    <th>Action</th>
                 </tr>
             </thead>
 
